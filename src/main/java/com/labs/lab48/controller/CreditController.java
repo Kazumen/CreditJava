@@ -28,7 +28,7 @@ public class CreditController {
 
     @GetMapping("/bank/{id}")
     public Page<CreditDto> getAllCreditsFromBank(@PageableDefault Pageable pageable, @PathVariable Integer id) {
-        return creditService.getCreditsByBank(pageable,id);
+        return creditService.getCreditsByBank(pageable, id);
     }
 
     @GetMapping("/{id}")

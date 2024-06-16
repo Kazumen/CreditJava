@@ -19,4 +19,6 @@ public interface LimitService {
     LimitDto addLimit(Integer userId, Integer bankId) throws LimitAlreadyExistsException;
 
     LimitDto updateLimit(Double maxLimit, Double currentLimit, Integer id);
+
+    LimitDto getLimitByUserAndBank(Integer userId, Integer bankId);
 }

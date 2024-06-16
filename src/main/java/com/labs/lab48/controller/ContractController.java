@@ -38,11 +38,7 @@ public class ContractController {
         return contractService.payRepayment(payment,id);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteContract(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok("Contract with id:" + contractService.deleteContract(id) + " was deleted");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e);
-        }
+    public void deleteContract(@PathVariable Integer id) {
+        contractService.deleteContract(id);
     }
 }

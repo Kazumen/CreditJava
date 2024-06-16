@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-    Integer delete(Integer id);
+    void delete(Integer id);
 
     Page<UserDto> getAllUsers(Pageable pageable);
 

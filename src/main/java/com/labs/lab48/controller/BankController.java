@@ -27,6 +27,10 @@ public class BankController {
     public BankDto getBank(@PathVariable Integer id) {
         return bankService.getBank(id);
     }
+    @GetMapping("/name/{name}")
+    public BankDto getBankByName(@PathVariable String name){
+        return bankService.getBankByName(name);
+    }
     @PostMapping
     public BankDto addBank(@RequestBody @Valid BankCreatingDto bankCreatingDto) throws BankAlreadyExistsException {
         return bankService.addBank(bankCreatingDto);
@@ -36,11 +40,7 @@ public class BankController {
         return bankService.editBank(id,bankCreatingDto);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBank(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok("Bank with id:" + bankService.deleteBank(id) + " was deleted");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error: " + e);
-        }
+    public void deleteBank(@PathVariable Integer id) {
+        bankService.deleteBank(id);
     }
 }

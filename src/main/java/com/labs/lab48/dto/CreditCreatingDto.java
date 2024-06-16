@@ -10,5 +10,4 @@ public record CreditCreatingDto(@NotBlank(message = "Can`t be blank") String nam
                                 @NotNull Double maxSum,
                                 @NotNull Double commission,
                                 @NotNull Long contractTerm,
-                                @NotNull
                                 Integer bankId) implements Serializable {}

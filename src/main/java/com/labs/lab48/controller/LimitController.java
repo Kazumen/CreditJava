@@ -41,6 +41,11 @@ public class LimitController {
     public Page<LimitDto> getAllLimitsByBank(@PageableDefault Pageable pageable, @PathVariable Integer id) {
         return limitService.getLimitsByBank(pageable,id);
     }
+    @GetMapping("/userbank")
+    public LimitDto getLimitByUserAndBank(@Param("userId") Integer userId,@Param("bankId") Integer bankId){
+        return limitService.getLimitByUserAndBank(userId, bankId);
+    }
+
     @GetMapping("/user/{id}")
     public Page<LimitDto> getAllLimitsByUser(@PageableDefault Pageable pageable, @PathVariable Integer id) {
         return limitService.getLimitsByUser(pageable,id);

@@ -35,7 +35,7 @@ public class BankServiceImpl implements BankService {
     public BankDto getBank(Integer id) {
         Optional<Bank> optionalBank = bankRepository.findById(id);
         Bank bank = optionalBank.orElseThrow(() -> new NoSuchElementException("There is no bank with that id!"));
-        log.info("Bank with id "+ id+ "was found!");
+        log.info("Bank with id "+ id+ " was found!");
         return bankMapper.bankToBankDto(bank);
     }
 
@@ -62,27 +62,34 @@ public class BankServiceImpl implements BankService {
     public BankDto editBank(Integer id, BankCreatingDto bankCreatingDto) throws BankAlreadyExistsException {
         Optional<Bank> optionalBank = bankRepository.findById(id);
         Bank bank =optionalBank.orElseThrow(() -> new NoSuchElementException("There is no bank with that id!"));
-        if (bankCreatingDto.name()!=null) {
+        if (bankCreatingDto.name()!=null && !bankCreatingDto.name().equals(bank.getName())) {
             if (bankRepository.findByName(bankCreatingDto.name()) != null)
-                throw new BankAlreadyExistsException("Genre with that name already exist");
+                throw new BankAlreadyExistsException("Bank with that name already exist");
             bank.setName(bankCreatingDto.name());
         }
-        if (bankCreatingDto.owner()!=null)
+        if (bankCreatingDto.owner()!=null && !bankCreatingDto.owner().equals(bank.getOwner()))
             bank.setOwner(bankCreatingDto.owner());
-        if (bankCreatingDto.address()!=null)
+        if (bankCreatingDto.address()!=null && !bankCreatingDto.address().equals(bank.getAddress()))
             bank.setAddress(bankCreatingDto.address());
-        if (bankCreatingDto.website()!=null)
+        if (bankCreatingDto.website()!=null && !bankCreatingDto.website().equals(bank.getAddress()))
             bank.setWebsite(bankCreatingDto.website());
-        if (bankCreatingDto.maxLimit()!=null)
+        if (bankCreatingDto.maxLimit()!=null && !bankCreatingDto.maxLimit().equals(bank.getMaxLimit()))
             bank.setMaxLimit(bankCreatingDto.maxLimit());
         log.info("Bank was edited.");
         return bankMapper.bankToBankDto(bankRepository.save(bank));
     }
 
     @Override
-    public Integer deleteBank(Integer id) {
+    public void deleteBank(Integer id) {
         bankRepository.deleteById(id);
         log.info("Bank was deleted.");
-        return id;
+    }
+
+    @Override
+    public BankDto getBankByName(String name) {
+        Optional<Bank> optionalBank = Optional.ofNullable(bankRepository.findByName(name));
+        Bank bank = optionalBank.orElseThrow(() -> new NoSuchElementException("There is no bank with that name!"));
+        log.info("Bank with name {} was found!", name);
+        return bankMapper.bankToBankDto(bank);
     }
 }

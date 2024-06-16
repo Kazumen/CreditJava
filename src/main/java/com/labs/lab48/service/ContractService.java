@@ -13,7 +13,7 @@ public interface ContractService {
 
     ContractDto getContract(Integer id);
 
-    Integer deleteContract(Integer id);
+    void deleteContract(Integer id);
 
     Page<ContractDto> getContractByUser(Pageable pageable, Integer id);
 

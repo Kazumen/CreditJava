@@ -15,5 +15,7 @@ public interface BankService {
 
     BankDto editBank(Integer id, BankCreatingDto bankCreatingDto) throws BankAlreadyExistsException;
 
-    Integer deleteBank(Integer id);
+    void deleteBank(Integer id);
+
+    BankDto getBankByName(String name);
 }

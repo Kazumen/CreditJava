@@ -54,10 +54,9 @@ public class ContractServiceImpl  implements ContractService {
     }
 
     @Override
-    public Integer deleteContract(Integer id) {
+    public void deleteContract(Integer id) {
         contractRepository.deleteById(id);
         log.info("Contract was deleted.");
-        return id;
     }
 
     @Override
